@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chidem Sabuncu | Web and mobile developer in New Westminster, BC</title>
+  <meta name="description" content="Portfolio of Chidem Sabuncu, a web and mobile developer in New Westminster, BC. Projects in Flutter, React, Java and more.">
+  <meta name="theme-color" content="#0B0F1E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230B0F1E'/%3E%3Crect x='5' y='5' width='54' height='54' fill='none' stroke='%23FFB454' stroke-width='4'/%3E%3Ctext x='32' y='42' font-family='monospace' font-size='26' font-weight='700' text-anchor='middle' fill='%23FFB454'%3ECS%3C/text%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script>
+    /* Before first paint: decide whether to show the loading screen
+       (once per visit, never with reduced motion). */
+    (function () {
+      var root = document.documentElement;
+      var seen = false;
+      try { seen = sessionStorage.getItem('boot-seen') === '1'; } catch (e) {}
+      var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!seen && !calm) root.classList.add('boot-on');
+    })();
+  </script>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="boot" aria-hidden="true">
+    <div class="boot-box">
+      <p class="boot-name">chidem.sabuncu</p>
+      <div class="boot-bar"><span></span></div>
+      <p class="boot-status"><span data-boot-text>Loading projects</span><span data-boot-pct>0%</span></p>
+    </div>
+  </div>
+
+  <div class="progress" aria-hidden="true"><span data-progress></span></div>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="Chidem Sabuncu, back to top"><span class="prompt">~/</span>chidem<span class="cursor" aria-hidden="true"></span></a>
+      <nav aria-label="Main">
+        <ul class="nav-list">
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero container" id="top" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <h1 id="hero-title" class="hero-title">Chidem Sabuncu</h1>
+        <p class="subtitle">Web and mobile developer in New Westminster, BC.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#projects">See my projects</a>
+          <a class="btn" href="https://github.com/chidems" rel="noopener">GitHub</a>
+          <a class="btn" href="https://www.linkedin.com/in/chidem/" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+
+      <div class="window terminal" role="group" aria-label="Introduction">
+        <div class="win-bar">
+          <span class="win-title">chidem@portfolio: ~</span>
+          <button class="skip-intro" type="button" data-skip hidden>Skip</button>
+        </div>
+        <div class="term-body">
+          <img class="badge" src="img/chidem.jpg" width="360" height="480" alt="Photo of Chidem Sabuncu">
+          <div class="term-lines" data-typed aria-hidden="true">
+            <p class="t-line t-cmd"><span class="t-prompt">$</span> <span class="t-text">whoami</span></p>
+            <p class="t-line t-out"><span class="t-text">Chidem Sabuncu, web and mobile developer.</span></p>
+            <p class="t-line t-cmd"><span class="t-prompt">$</span> <span class="t-text">cat about.txt</span></p>
+            <p class="t-line t-out"><span class="t-text">Recent Computer and Information Systems graduate from Douglas College. I build with JavaScript, React, PHP, Flutter and Java.</span></p>
+            <p class="t-line t-cmd"><span class="t-prompt">$</span> <span class="t-text">cat now.txt</span></p>
+            <p class="t-line t-out"><span class="t-text">Peer tutor at Douglas College. Looking for my first developer role in the Vancouver area.</span></p>
+            <p class="t-line t-cmd"><span class="t-prompt">$</span> <span class="t-text"></span><span class="cursor" aria-hidden="true"></span></p>
+          </div>
+          <p class="visually-hidden">Chidem Sabuncu, web and mobile developer. Recent Computer and Information Systems graduate from Douglas College. I build with JavaScript, React, PHP, Flutter and Java. I am a peer tutor at Douglas College and looking for my first developer role in the Vancouver area.</p>
+        </div>
+        <div class="term-status">
+          <span class="status-item"><span class="dot" aria-hidden="true"></span>Open to work</span>
+          <span class="status-item">Vancouver <time data-clock>--:--</time></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container" id="projects" aria-labelledby="projects-title">
+      <h2 id="projects-title" class="section-title" data-reveal="type">Projects</h2>
+
+      <div class="project-grid">
+        <article class="window project" data-reveal>
+          <div class="win-bar"><span class="win-title">questup/</span><span class="win-meta">mobile</span></div>
+          <div class="project-body">
+            <h3>QuestUp</h3>
+            <p>A mobile app that turns everyday life into real-world side quests, in a pixel-art RPG style, with a quest feed, photo completion, an avatar and coin shop, and achievements. I built the Flutter front end from toolchain setup to completion.</p>
+            <ul class="tags" aria-label="Technologies"><li>Flutter</li><li>Dart</li><li>Riverpod</li><li>Claude Code</li></ul>
+            <a class="link" href="https://github.com/chidems/QuestUp-FrontEnd" rel="noopener">View the code on GitHub</a>
+          </div>
+        </article>
+
+        <article class="window project" data-reveal>
+          <div class="win-bar"><span class="win-title">full-stack-web-app/</span><span class="win-meta">web</span></div>
+          <div class="project-body">
+            <h3>Full-stack web app</h3>
+            <p>A responsive web app with a React front end that talks to a RESTful API, with MongoDB storing the data.</p>
+            <ul class="tags" aria-label="Technologies"><li>React</li><li>REST API</li><li>MongoDB</li></ul>
+          </div>
+        </article>
+
+        <article class="window project" data-reveal>
+          <div class="win-bar"><span class="win-title">rejunk/</span><span class="win-meta">web</span></div>
+          <div class="project-body">
+            <h3>ReJunk</h3>
+            <p>A furniture resale platform built by a team for a software engineering course. I wrote the wireframe interaction narratives, mapped design goals to non-functional requirements, and added watermarks to product photos.</p>
+            <ul class="tags" aria-label="Technologies"><li>Team project</li><li>Wireframes</li><li>Requirements</li></ul>
+          </div>
+        </article>
+
+        <article class="window project" data-reveal>
+          <div class="win-bar"><span class="win-title">circaflow/</span><span class="win-meta">mobile</span></div>
+          <div class="project-body">
+            <h3>CircaFlow</h3>
+            <p>A sleep tracking Android app in Java, with Firebase Authentication and Firestore. It came with a user guide and a technical report.</p>
+            <ul class="tags" aria-label="Technologies"><li>Android</li><li>Java</li><li>Firebase</li></ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section container" id="skills" aria-labelledby="skills-title">
+      <h2 id="skills-title" class="section-title" data-reveal="type">Skills</h2>
+      <dl class="skills">
+        <div data-reveal>
+          <dt>Languages</dt>
+          <dd><ul class="chips"><li>JavaScript</li><li>PHP</li><li>Python</li><li>Java</li><li>C#</li><li>Dart</li><li>SQL</li><li>HTML/CSS</li></ul></dd>
+        </div>
+        <div data-reveal>
+          <dt>Web and mobile</dt>
+          <dd><ul class="chips"><li>React</li><li>RESTful APIs</li><li>Jest</li><li>Flutter</li><li>Android Studio</li></ul></dd>
+        </div>
+        <div data-reveal>
+          <dt>Databases</dt>
+          <dd><ul class="chips"><li>SQL Server</li><li>MySQL</li><li>MongoDB</li></ul></dd>
+        </div>
+        <div data-reveal>
+          <dt>Cloud and tools</dt>
+          <dd><ul class="chips"><li>Google Cloud</li><li>OpenStack</li><li>Kubernetes</li><li>Terraform</li><li>Git and GitHub</li><li>Claude Code</li></ul></dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="section container" id="experience" aria-labelledby="experience-title">
+      <h2 id="experience-title" class="section-title" data-reveal="type">Experience and education</h2>
+      <ol class="timeline" data-timeline>
+        <li class="timeline-fill" aria-hidden="true"></li>
+        <li class="t-item" data-reveal>
+          <p class="when">May 2026 to Aug 2026</p>
+          <h3>Peer Tutor</h3>
+          <p class="org">Douglas College Learning Centre, New Westminster, BC</p>
+          <ul class="points">
+            <li>Debugged student code in Java, C# and Python, and broke down hard concepts so students could find the cause themselves.</li>
+            <li>Tutored one-on-one and in small groups in programming, SQL and databases, and operating systems.</li>
+            <li>Prepared worked examples and practice exercises for each course and student.</li>
+          </ul>
+        </li>
+        <li class="t-item" data-reveal>
+          <p class="when">Completed Aug 2026</p>
+          <h3>Post-Baccalaureate Diploma, Computer and Information Systems</h3>
+          <p class="org">Douglas College, Emerging Technologies stream. GPA 3.88</p>
+          <ul class="points">
+            <li>Courses included Full-Stack Web Development, Backend Web Development, Mobile App Development, Databases, Software Engineering and Cloud Computing.</li>
+          </ul>
+        </li>
+      </ol>
+    </section>
+
+    <section class="section container contact" id="contact" aria-labelledby="contact-title">
+      <h2 id="contact-title" class="section-title" data-reveal="type">Contact</h2>
+      <div class="window contact-box" data-reveal>
+        <p class="contact-lead">I'm looking for a developer role in the Vancouver area. The quickest way to reach me is email.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="mailto:chidemsabuncu@gmail.com">Email me</a>
+          <button class="btn" type="button" data-copy-email="chidemsabuncu@gmail.com">Copy email address</button>
+          <a class="btn" href="https://www.linkedin.com/in/chidem/" rel="noopener">LinkedIn</a>
+          <a class="btn" href="https://github.com/chidems" rel="noopener">GitHub</a>
+        </div>
+        <p class="visually-hidden" id="copy-status" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>Built with plain HTML, CSS and JavaScript. <a class="link" href="https://github.com/chidems/chidems.github.io" rel="noopener">Read the source</a></p>
+      <p>&copy; <span data-year>2026</span> Chidem Sabuncu</p>
+    </div>
+  </footer>
+</body>
+</html>

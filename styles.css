@@ -1,0 +1,328 @@
+/* ==========================================================================
+   Chidem Sabuncu portfolio
+   A dark workstation look: terminal intro, framed windows, amber and cyan signals.
+   Motion: one loading screen, then sections reveal as they scroll into view.
+   ========================================================================== */
+
+:root {
+  --bg: #0b0f1e;
+  --grid: rgba(120, 140, 255, 0.05);
+  --panel: #111833;
+  --panel-2: #0d1329;
+  --line: #252f5a;
+  --text: #dde3fb;
+  --muted: #9aa5d2;
+  --amber: #ffb454;
+  --cyan: #56e0d4;
+  --shadow: #04060f;
+  --on-amber: #0b0f1e;
+
+  --display: "Chakra Petch", "Segoe UI", system-ui, sans-serif;
+  --sans: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  color-scheme: dark;
+}
+
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 40px 40px;
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+h1, h2, h3 { margin: 0; font-family: var(--display); font-weight: 600; line-height: 1.15; text-wrap: balance; }
+p { margin: 0 0 0.9rem; max-width: 64ch; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+dl, dd { margin: 0; }
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+
+:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+
+.container { width: min(100% - 2 * clamp(1.25rem, 4vw, 2.5rem), 66rem); margin-inline: auto; }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.skip-link {
+  position: absolute; left: 1rem; top: -4rem; z-index: 60;
+  padding: 0.5rem 0.9rem; background: var(--amber); color: var(--on-amber); font-weight: 600; text-decoration: none;
+}
+.skip-link:focus { top: 0.5rem; }
+
+.link {
+  color: var(--cyan);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+}
+.link:hover { color: var(--bg); background: var(--cyan); text-decoration-color: transparent; }
+
+/* ---------- Scroll progress ---------- */
+.progress { position: fixed; inset: 0 0 auto; z-index: 40; height: 2px; pointer-events: none; }
+.progress span { display: block; height: 100%; background: var(--amber); transform: scaleX(0); transform-origin: left; }
+
+/* ---------- Header ---------- */
+.site-header {
+  position: sticky; top: 0; z-index: 30;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.header-inner { display: flex; align-items: center; gap: 1rem; min-height: 3.5rem; }
+
+.brand {
+  margin-right: auto; display: inline-flex; align-items: center;
+  font-family: var(--mono); font-size: 0.95rem; font-weight: 500; text-decoration: none;
+}
+.prompt { color: var(--amber); }
+
+.cursor {
+  display: inline-block; width: 0.55ch; height: 1.05em; margin-left: 0.2ch;
+  background: var(--amber); animation: blink 1.1s steps(1) infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+.nav-list { display: flex; gap: 0.15rem; }
+.nav-list a {
+  display: block; padding: 0.3rem 0.65rem;
+  font-family: var(--mono); font-size: 0.8125rem; color: var(--muted); text-decoration: none;
+  border: 1px solid transparent;
+}
+.nav-list a:hover { color: var(--text); border-color: var(--line); }
+.nav-list a[aria-current="true"] { color: var(--amber); border-color: color-mix(in srgb, var(--amber) 45%, transparent); }
+
+/* ---------- Windows ---------- */
+.window { background: var(--panel); border: 1px solid var(--line); box-shadow: 5px 5px 0 var(--shadow); }
+
+.win-bar {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  min-height: 2.1rem; padding: 0.25rem 0.85rem;
+  background: var(--panel-2); border-bottom: 1px solid var(--line);
+  font-family: var(--mono); font-size: 0.75rem; color: var(--muted);
+}
+.win-title { display: inline-flex; align-items: center; gap: 0.55rem; }
+.win-title::before { content: ""; width: 0.5rem; height: 0.5rem; background: var(--amber); }
+.win-meta { color: var(--cyan); }
+
+/* ---------- Buttons ---------- */
+.actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+.btn {
+  display: inline-flex; align-items: center; min-height: 2.6rem; padding: 0.4rem 1rem;
+  font-family: var(--mono); font-size: 0.875rem; font-weight: 500; color: var(--text); text-decoration: none;
+  background: var(--panel); border: 1px solid var(--muted); box-shadow: 3px 3px 0 var(--shadow);
+  cursor: pointer; transition: transform 0.12s var(--ease), box-shadow 0.12s var(--ease), border-color 0.12s;
+}
+.btn:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--shadow); border-color: var(--text); }
+.btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--shadow); }
+.btn-primary { color: var(--on-amber); background: var(--amber); border-color: var(--amber); }
+.btn-primary:hover { border-color: var(--amber); }
+
+/* ---------- Hero ---------- */
+.hero { display: grid; gap: 2.5rem 3rem; padding-block: clamp(3rem, 9vw, 6.5rem) clamp(2rem, 5vw, 3.5rem); }
+
+.hero-title { font-size: clamp(2.4rem, 1.4rem + 4vw, 4rem); line-height: 1.02; letter-spacing: -0.015em; }
+.subtitle { margin: 1rem 0 1.75rem; font-family: var(--mono); font-size: 0.95rem; color: var(--cyan); }
+
+.skip-intro {
+  padding: 0.05rem 0.5rem; font-family: var(--mono); font-size: 0.75rem; color: var(--muted);
+  background: transparent; border: 1px solid var(--line); cursor: pointer;
+}
+.skip-intro:hover { color: var(--text); border-color: var(--amber); }
+.skip-intro[hidden] { display: none; }
+
+.term-body { display: grid; gap: 1rem 1.25rem; padding: 1.15rem; }
+
+.badge {
+  width: 6rem; aspect-ratio: 3 / 4; object-fit: cover;
+  border: 1px solid var(--amber); box-shadow: 3px 3px 0 var(--shadow);
+}
+
+/* Reserve the final height so the page doesn't jump while the intro types. */
+.term-lines { font-family: var(--mono); font-size: 0.8125rem; line-height: 1.6; min-height: 24.5em; }
+.term-lines .t-line { margin: 0 0 0.45rem; max-width: none; }
+.t-line[hidden] { display: none; }
+.t-prompt { color: var(--amber); font-weight: 500; }
+.t-cmd .t-text { color: var(--text); font-weight: 500; }
+.t-out { color: var(--muted); padding-left: 1.5ch; }
+
+.term-status {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.2rem 1.25rem;
+  padding: 0.35rem 0.85rem; border-top: 1px solid var(--line); background: var(--panel-2);
+  font-family: var(--mono); font-size: 0.75rem; color: var(--muted);
+}
+.status-item { display: inline-flex; align-items: center; gap: 0.45rem; }
+.dot { width: 0.5rem; height: 0.5rem; background: var(--cyan); animation: blink 1.6s steps(1) infinite; }
+
+@media (min-width: 34rem) {
+  .term-body { grid-template-columns: minmax(0, 1fr) auto; align-items: start; }
+  .badge { order: 2; width: 6.5rem; }
+  .term-lines { min-height: 17.5em; }
+}
+@media (min-width: 60rem) {
+  .hero { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); align-items: center; }
+  .term-lines { min-height: 20em; }
+}
+
+/* ---------- Sections ---------- */
+.section { padding-block: clamp(2.5rem, 6vw, 4.5rem); }
+
+.section-title { margin-bottom: 1.75rem; font-size: clamp(1.45rem, 1.25rem + 0.9vw, 1.9rem); }
+.section-title::before { content: "> "; color: var(--amber); }
+
+/* ---------- Projects ---------- */
+.project-grid { display: grid; gap: 1.5rem; }
+.project { display: flex; flex-direction: column; transition: border-color 0.2s, transform 0.2s var(--ease); }
+.project:hover { border-color: color-mix(in srgb, var(--amber) 55%, var(--line)); }
+
+.project-body { display: flex; flex-direction: column; flex: 1; padding: 1.2rem 1.25rem 1.35rem; }
+.project h3 { margin-bottom: 0.6rem; font-size: clamp(1.15rem, 1.05rem + 0.4vw, 1.35rem); }
+.project p { font-size: 0.9375rem; color: var(--muted); }
+.project .link { align-self: flex-start; margin-top: 0.9rem; font-size: 0.9rem; }
+
+.tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: auto; padding-top: 0.25rem; }
+.tags li {
+  padding: 0 0.5rem; font-family: var(--mono); font-size: 0.75rem; line-height: 1.7; color: var(--cyan);
+  border: 1px solid color-mix(in srgb, var(--cyan) 45%, transparent);
+}
+
+@media (min-width: 46rem) { .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* ---------- Skills ---------- */
+.skills { display: grid; gap: 1.75rem 2.5rem; }
+.skills dt { margin-bottom: 0.6rem; font-family: var(--mono); font-size: 0.8125rem; color: var(--amber); }
+.chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.chips li {
+  padding: 0.2rem 0.7rem; font-size: 0.9rem;
+  background: var(--panel); border: 1px solid var(--line);
+}
+@media (min-width: 46rem) { .skills { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* ---------- Timeline (the amber line fills as you scroll) ---------- */
+.timeline { position: relative; padding-left: 1.75rem; }
+.timeline::before { content: ""; position: absolute; left: 0.3rem; top: 0.4rem; bottom: 0; width: 2px; background: var(--line); }
+.timeline-fill {
+  position: absolute; left: 0.3rem; top: 0.4rem; bottom: 0; width: 2px;
+  background: var(--amber); transform: scaleY(var(--fill, 1)); transform-origin: top;
+}
+
+.t-item { position: relative; padding-bottom: 2.25rem; }
+.t-item:last-child { padding-bottom: 0.25rem; }
+.t-item::before {
+  content: ""; position: absolute; left: -1.75rem; top: 0.3rem;
+  width: 0.75rem; height: 0.75rem; background: var(--bg); border: 2px solid var(--amber);
+}
+
+.t-item h3 { font-size: clamp(1.1rem, 1.02rem + 0.35vw, 1.25rem); }
+.when { margin: 0 0 0.2rem; font-family: var(--mono); font-size: 0.75rem; color: var(--cyan); }
+.org { margin: 0.25rem 0 0.75rem; font-size: 0.9375rem; color: var(--muted); }
+.points { display: grid; gap: 0.4rem; max-width: 64ch; font-size: 0.9375rem; }
+.points li { position: relative; padding-left: 1.4ch; }
+.points li::before { content: "-"; position: absolute; left: 0; color: var(--amber); }
+
+/* ---------- Contact ---------- */
+.contact-box { padding: clamp(1.25rem, 3vw, 2rem); }
+.contact-lead { font-size: 1.0625rem; max-width: 46ch; margin-bottom: 1.25rem; }
+
+/* ---------- Footer ---------- */
+.site-footer { padding-block: 1.75rem 2.5rem; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.8125rem; }
+.footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 2rem; }
+.footer-inner p { margin: 0; }
+
+/* ---------- Small screens ---------- */
+@media (max-width: 40rem) {
+  .nav-list a { padding: 0.3rem 0.4rem; font-size: 0.75rem; }
+  .header-inner { gap: 0.5rem; }
+}
+@media (max-width: 34rem) {
+  .brand { display: none; }
+  .nav-list { margin-inline: auto; }
+}
+
+/* ==========================================================================
+   Scroll reveals. Only active once script.js has run, so nothing stays hidden
+   if JavaScript fails.
+   ========================================================================== */
+.reveal-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.6s ease, transform 0.7s var(--ease);
+  transition-delay: var(--delay, 0s);
+}
+.reveal-ready [data-reveal].is-in { opacity: 1; transform: none; }
+
+/* Headings type themselves in: the text is uncovered left to right in steps.
+   The clip sits on an inner span so the heading itself stays measurable. */
+.reveal-ready [data-reveal="type"] { opacity: 1; transform: none; }
+.reveal-ready [data-reveal="type"] .type-mask {
+  display: inline-block;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.7s steps(14);
+}
+.reveal-ready [data-reveal="type"].is-in .type-mask { clip-path: inset(0 0 0 0); }
+
+/* Chips inside a revealed skill group pop in one after another. */
+.reveal-ready .skills [data-reveal] .chips li { opacity: 0; transform: translateY(6px); transition: opacity 0.35s ease, transform 0.35s var(--ease); }
+.reveal-ready .skills [data-reveal].is-in .chips li { opacity: 1; transform: none; transition-delay: calc(0.15s + var(--i, 0) * 0.05s); }
+
+/* ==========================================================================
+   Loading screen
+   ========================================================================== */
+.boot { display: none; }
+.boot-on .boot {
+  position: fixed; inset: 0; z-index: 70;
+  display: grid; place-items: center; padding: 1.5rem;
+  background: var(--bg);
+  /* Failsafe: if the script never runs, the screen still clears. */
+  animation: boot-failsafe 0.01s 4s forwards;
+}
+.boot-run body { overflow: hidden; }
+
+.boot-box { width: min(22rem, 100%); font-family: var(--mono); }
+.boot-name { margin: 0 0 0.9rem; font-size: 1rem; color: var(--text); }
+.boot-name::before { content: "~/"; color: var(--amber); }
+.boot-bar { height: 4px; background: var(--line); overflow: hidden; }
+.boot-bar span { display: block; height: 100%; background: var(--amber); transform: scaleX(0); transform-origin: left; }
+.boot-status { display: flex; justify-content: space-between; margin: 0.6rem 0 0; font-size: 0.75rem; color: var(--muted); max-width: none; }
+
+.boot.is-leaving { animation: boot-out 0.6s var(--ease) forwards; }
+
+/* The hero waits behind the loading screen, then rises in. */
+.boot-run .hero-copy,
+.boot-run .terminal { opacity: 0; transform: translateY(18px); }
+.boot-done .hero-copy,
+.boot-done .terminal { transition: opacity 0.6s ease, transform 0.7s var(--ease); }
+.boot-done .terminal { transition-delay: 0.12s; }
+
+@keyframes boot-out { to { clip-path: inset(0 0 100% 0); } }
+@keyframes boot-failsafe { to { visibility: hidden; } }
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .boot { display: none !important; }
+  .cursor, .dot { animation: none; }
+  .reveal-ready [data-reveal],
+  .reveal-ready [data-reveal="type"] .type-mask,
+  .reveal-ready .skills [data-reveal] .chips li { opacity: 1; transform: none; clip-path: none; transition: none; }
+  .btn, .project { transition: none; }
+  .btn:hover { transform: none; }
+}
